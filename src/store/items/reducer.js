@@ -1,4 +1,4 @@
-import { ITEM_ADDED, addNewItem} from './actions';
+import { ITEM_ADDED, ITEM_REMOVED, addNewItem} from './actions';
 
 let id = 1;
 
@@ -21,6 +21,11 @@ export const reducer = (state = initialItems, action) => {
     };
     return [...state, item];
   }
+
+  if (action.type === ITEM_REMOVED) {
+    return state.filter(item => item.uuid !== action.payload.uuid);
+  }
+
   return state;
 };
 
