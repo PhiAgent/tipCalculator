@@ -4,7 +4,7 @@ import { MenuItemsContainer} from '../containers/menuItemsContainer';
 
 import { MenuItems } from './MenuItems';
 import { NewItemFormContainer } from '../containers/newItemFormContainer';
-import { Summary } from './Summary';
+import { SummaryContainer } from '../containers/summaryContainer';
 
 // const items = [
 //   { uuid: 1, name: 'Tofu Roast', price: 14, quantity: 1 },
@@ -17,7 +17,7 @@ const Calculator = () => {
       <NewItemFormContainer />
       <MenuItemsContainer/>
       <TipSelectContainer />
-      <Summary />
+      <SummaryContainer />
     </Card>
   );
 };
