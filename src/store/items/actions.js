@@ -7,3 +7,8 @@ export const addNewItem = (name, price) => ({
     price
   }
 });
+
+// action
+// reducer
+// wrap
+// remove menu-item
