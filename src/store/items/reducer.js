@@ -57,12 +57,20 @@ export const reducer = (state = initialItems, action) => {
     )
   }
 
+  // if (action.type === ITEM_QUANTITY_UPDATE) {
+  //   return state.map(
+  //     item =>
+  //       item.uuid === action.payload.uuid ?
+  //         { ...item, quantity: action.payload.quantity }
+  //         : item
+  //   )
+  // }
+
   if (action.type === ITEM_QUANTITY_UPDATE) {
-    return state.map(
-      item =>
-        item.uuid === action.payload.uuid ?
-          { ...item, quantity: action.payload.quantity }
-          : item
+    return produce(state, draftState => {
+      let item = state.find(item => item.uuid === action.payload.uuid)
+      item.quantity = Number(action.payload.quantity);
+      }
     )
   }
   return state;
