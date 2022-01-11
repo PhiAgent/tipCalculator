@@ -1,13 +1,12 @@
 import {Summary} from '../components/Summary';
 import {connect} from 'react-redux';
+import { selectSubtotal, selectTipAmount, selectTotal} from '../store/items/selector';
 
 const mapStateToProps = state => {
-  const items = state.items;
-  let subtotal = items.reduce(
-    (acc, item) => acc+ (item.quantity * item.price), 0
-  );
-  let tipAmount = subtotal * (state.tipPercentage/100);
-  const total = subtotal + tipAmount;
+  const subtotal = selectSubtotal(state);
+  const tipAmount = selectTipAmount(state);
+  const total = selectTotal(state);
+
   return {
     subtotal,
     tipAmount,
