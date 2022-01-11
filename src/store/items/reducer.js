@@ -39,13 +39,22 @@ export const reducer = (state = initialItems, action) => {
     return state.filter(item => item.uuid !== action.payload.uuid);
   }
 
+  // if (action.type === ITEM_PRICE_UPDATE) {
+  //   return state.map(
+  //     item =>
+  //       item.uuid === action.payload.uuid ?
+  //       {...item, price: action.payload.price}
+  //       : item
+  //     )
+  // }
+
   if (action.type === ITEM_PRICE_UPDATE) {
-    return state.map(
-      item =>
-        item.uuid === action.payload.uuid ?
-        {...item, price: action.payload.price}
-        : item
-      )
+    return produce(
+      state, draftState => {
+        let item = state.find(item => item.uuid === action.payload.uuid);
+        item.price = Number(action.payload.price);
+      }
+    )
   }
 
   if (action.type === ITEM_QUANTITY_UPDATE) {
