@@ -1,4 +1,5 @@
 import { ITEM_ADDED, ITEM_REMOVED, addNewItem, ITEM_PRICE_UPDATE, ITEM_QUANTITY_UPDATE} from './actions';
+import produce from 'immer';
 
 let id = 1;
 
@@ -13,13 +14,25 @@ const items = [
 ];
 
 export const reducer = (state = initialItems, action) => {
-  if (action.type === ITEM_ADDED){
-    const item = {
-      uuid: id++,
-      quantity: 1,
-      ...action.payload
-    };
-    return [...state, item];
+
+  // if (action.type === ITEM_ADDED){
+  //   const item = {
+  //     uuid: id++,
+  //     quantity: 1,
+  //     ...action.payload
+  //   };
+  //   return [...state, item];
+  // }
+
+  if(action.type === ITEM_ADDED){
+    produce(state, draftState => {
+      const item = {
+        uuid: id++,
+        quantity: 1,
+        ...action.payload
+      };
+      draftState.push(item)
+    })
   }
 
   if (action.type === ITEM_REMOVED) {
