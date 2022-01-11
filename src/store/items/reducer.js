@@ -13,67 +13,95 @@ const items = [
   { uuid: 2, name: 'Vegan Ham', price: 12, quantity: 1 }
 ];
 
-export const reducer = (state = initialItems, action) => {
+// export const reducer = (state = initialItems, action) => {
 
-  // if (action.type === ITEM_ADDED){
-  //   const item = {
-  //     uuid: id++,
-  //     quantity: 1,
-  //     ...action.payload
-  //   };
-  //   return [...state, item];
-  // }
+//   // if (action.type === ITEM_ADDED){
+//   //   const item = {
+//   //     uuid: id++,
+//   //     quantity: 1,
+//   //     ...action.payload
+//   //   };
+//   //   return [...state, item];
+//   // }
 
-  if(action.type === ITEM_ADDED){
-    produce(state, draftState => {
+//   if(action.type === ITEM_ADDED){
+//     produce(state, draftState => {
+//       const item = {
+//         uuid: id++,
+//         quantity: 1,
+//         ...action.payload
+//       };
+//       draftState.push(item)
+//     })
+//   }
+
+//   if (action.type === ITEM_REMOVED) {
+//     return state.filter(item => item.uuid !== action.payload.uuid);
+//   }
+
+//   // if (action.type === ITEM_PRICE_UPDATE) {
+//   //   return state.map(
+//   //     item =>
+//   //       item.uuid === action.payload.uuid ?
+//   //       {...item, price: action.payload.price}
+//   //       : item
+//   //     )
+//   // }
+
+//   if (action.type === ITEM_PRICE_UPDATE) {
+//     return produce(
+//       state, draftState => {
+//         let item = draftState.find(item => item.uuid === action.payload.uuid);
+//         item.price = parseInt(action.payload.price, 10);
+//       }
+//     )
+//   }
+
+//   // if (action.type === ITEM_QUANTITY_UPDATE) {
+//   //   return state.map(
+//   //     item =>
+//   //       item.uuid === action.payload.uuid ?
+//   //         { ...item, quantity: action.payload.quantity }
+//   //         : item
+//   //   )
+//   // }
+
+//   if (action.type === ITEM_QUANTITY_UPDATE) {
+//     return produce(state, draftState => {
+//       let item = draftState.find(item => item.uuid === action.payload.uuid)
+//       item.quantity = Number(action.payload.quantity);
+//       }
+//     )
+//   }
+//   return state;
+// };
+
+// immer reducer
+
+export const reducer = produce((state = initialItems, action) => {
+
+  if (action.type === ITEM_ADDED) {
       const item = {
         uuid: id++,
         quantity: 1,
         ...action.payload
       };
-      draftState.push(item)
-    })
+      state.push(item)
   }
 
   if (action.type === ITEM_REMOVED) {
     return state.filter(item => item.uuid !== action.payload.uuid);
   }
 
-  // if (action.type === ITEM_PRICE_UPDATE) {
-  //   return state.map(
-  //     item =>
-  //       item.uuid === action.payload.uuid ?
-  //       {...item, price: action.payload.price}
-  //       : item
-  //     )
-  // }
-
   if (action.type === ITEM_PRICE_UPDATE) {
-    return produce(
-      state, draftState => {
-        let item = state.find(item => item.uuid === action.payload.uuid);
-        item.price = Number(action.payload.price);
-      }
-    )
+    let item = state.find(item => item.uuid === action.payload.uuid);
+    item.price = action.payload.price;
   }
-
-  // if (action.type === ITEM_QUANTITY_UPDATE) {
-  //   return state.map(
-  //     item =>
-  //       item.uuid === action.payload.uuid ?
-  //         { ...item, quantity: action.payload.quantity }
-  //         : item
-  //   )
-  // }
 
   if (action.type === ITEM_QUANTITY_UPDATE) {
-    return produce(state, draftState => {
       let item = state.find(item => item.uuid === action.payload.uuid)
-      item.quantity = Number(action.payload.quantity);
-      }
-    )
+    item.quantity = action.payload.quantity;
   }
-  return state;
-};
+}, initialItems);
 
 export default reducer;
