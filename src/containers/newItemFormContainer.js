@@ -7,7 +7,6 @@ import { bindActionCreators} from 'redux';
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onSubmit: (name, price) => {
-      // console.log(ownProps);
       return dispatch(addNewItem(name, price))
     }
   }
@@ -25,4 +24,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 //   onSubmit: (name, price) => addNewItem(name, price)
 // };
 
-export const NewItemFormContainer = connect(null, mapDispatchToProps)(NewItemForm)
+export const NewItemFormContainer = connect(null, mapDispatchToProps)(NewItemForm);
