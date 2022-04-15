@@ -1,6 +1,6 @@
 # Tip Calculator
 
-A sample React and Redux application for practicing React and Redux.
+A sample front-end application built with React & Redux.
 
 Part of the [Redux Fundamentals](https://stevekinney.github.io/redux-fundamentals) course for [Frontend Masters](https://frontendmasters.com).
 
